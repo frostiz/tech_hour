@@ -22,14 +22,34 @@ make 4.1
 
 ### Installing
 
+A step by step series of examples that tell you how to get a development env running.
 
-Go at the root of the project and run the following command
+Firstly, open a shell at the root of the project and run the following command
 
 ```
-make
+make install
 ```
 
-Then click on the URL to open the page and run the project [localhost](localhost:8000)
+You will have to configure the .env to make the project working.
+
+In order to do this, open it and replace
+* "user" by your mysql user.
+* "pass" by your mysql password.
+* "db_name" by a database name of your choice.
+
+_Change IP and Port if needed._
+```
+DATABASE_URL=mysql://user:pass@127.0.0.1:3306/db_name
+```
+
+Secondly, you have to create the database, update the database schema and insert testing data by running the following commands at the root of the project.
+```
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --force
+php bin/console doctrine:fixtures:load
+```
+
+Finally, run  ``` make ```, wait, click on the [URL](http://localhost:8000) to open the page and test the project locally.
 
 ## Built With
 
